@@ -49,7 +49,7 @@ int max_query(int node, int start, int end, int left, int right) {
 
 int main() {
     ios::sync_with_stdio(0);
-    // cin.tie(0); cout.tie(0);
+    cin.tie(0); cout.tie(0);
 
     // cin >> N >> M;
     scanf("%d %d", &N, &M);
