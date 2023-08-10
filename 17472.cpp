@@ -186,6 +186,8 @@ int main() {
         }
     }
 
+    // ==========
+
     // 각 섬 번호 출력
     cout << "\nNew Map\n";
     for (int i = 1; i <= N; i++) {
@@ -217,6 +219,8 @@ int main() {
         cout << "From island " << edge.node[0] << " to island " << edge.node[1] << " with distance: " << edge.distance << "\n";
     }
     cout << "---------------------\n"; // For separation
+
+    //
 
     kruskal();
 
