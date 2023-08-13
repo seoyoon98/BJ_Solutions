@@ -24,16 +24,16 @@ void bfs(int start_x, int start_y) {
     int cur_y = start_y;
 
     while (1) {
-        // for (int i = 1; i <= n; i++) {
-        //     for (int j = 1; j <= n; j++) {
-        //         printf("%d ", map[i][j]);
-        //     }
-        //     printf("\n");
-        // }
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                printf("%d ", map[i][j]);
+            }
+            printf("\n");
+        }
 
-        // printf("\n-------------------\n");
-        // printf("current ans: %d", ans);
-        // printf("\n-------------------\n\n");
+        printf("\n-------------------\n");
+        printf("current ans: %d", ans);
+        printf("\n-------------------\n\n");
 
         for (int i = 1; i <= n; i++)
             for (int j = 1; j <= n; j++)
@@ -91,6 +91,7 @@ void bfs(int start_x, int start_y) {
             map[x][y] = 0;
             eat_cnt++;
             ans += dist[x][y];
+            
             cur_x = x;
             cur_y = y;
         }
@@ -154,7 +155,7 @@ int main() {
             }
         }
     }
-    // printf("\n");
+    printf("\n");
 
     shark_size = 2, eat_cnt = 0;
 
