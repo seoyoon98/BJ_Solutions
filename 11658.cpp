@@ -65,28 +65,3 @@ int main() {
 
     return 0;
 }
-
-int sum(vector<int> &tree, int i)
-{
-    int ans = 0;
-    while (i > 0)
-    {
-        ans += tree[i];
-        i -= (i & -i); // 최하위 비트 지우기 
-    }
-
-    for (int index = i; index > 0; index -= (index & -index)) {
-        ans += tree[i];
-    }
- 
-    return ans;
-}
- 
-void update(vector<int> &tree, int i, int diff)
-{
-    while (i < tree.size())
-    {
-        tree[i] += diff;
-        i += (i & -i);
-    }
-}
