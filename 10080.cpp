@@ -1,68 +1,52 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-
 #define MAX 200001
 
 using namespace std;
 
-int ball_num, sum;
-int same_color[MAX], same_size[MAX], ans[MAX];
-
-struct ball {
-    int weight, color, index;
+struct ball{
+    int weight, color, idx;
 };
 
-vector<ball> v;
+int ans[MAX];
+int C[MAX];
+int S[MAX];
+int N;
+bool comp(ball &a, ball &b) {
 
-bool cmp(ball &a, ball &b) {
-    if (a.weight == b.weight)
-        return a.color < b.color;
+    if (a.weight==b.weight) return a.color < b.color;
+
     return a.weight < b.weight;
 }
+int main(void)
+{
+    vector <ball> v;
 
-void input() {
-    scanf("%d", &ball_num);
-
-    for (int i = 0; i < ball_num; i++) {
-        int weight, color;
+    cin >> N;
+    for(int i=0;i<N;i++){
+        int weight,color;
         scanf("%d %d", &color, &weight);
+        v.push_back({weight,color,i});
+    }
+    sort(v.begin(),v.end(),comp);
+    
+    int sum=0;
+    
+    for(int i=0;i<N;i++){
         
-        ball b;
-        b.weight = weight;
-        b.color = color;
-        b.index = i;
-        v.push_back(b);
+        int weight = v[i].weight;
+        int color = v[i].color;
+        int idx = v[i].idx;
+        
+        C[color]+=weight;
+        S[weight]+=weight;
+        sum+=weight;
+        
+        ans[idx]= sum - C[color] - S[weight] +weight;
+        if(i!=0 && (v[i-1].color == color) && (v[i-1].weight == weight))    ans[idx] = ans[v[i-1].idx];
     }
-
-    sort(v.begin(), v.end(), cmp);
-}
-
-int main() {
-    setbuf(stdout, NULL);
-    ios_base::sync_with_stdio(0);
-    cin.tie(0); cout.tie(0);
-
-    input();
-
-    for (int i = 0; i < v.size(); i++) {
-        int weight, color, index;
-        weight = v[i].weight;
-        color = v[i].color;
-        index = v[i].index;
-
-        same_color[color] += weight;
-        same_size[weight] += weight;
-        sum += weight;
-
-        ans[index] = sum - same_color[color] - same_size[weight] + weight;
-
-        if ((i != 0) && (v[i - 1].weight == weight) && (v[i - 1].color == color))
-            ans[index] = ans[v[i - 1].index];
-    }
-
-    for (int i = 0; i < ball_num; i++)
-        printf("%d\n", ans[i]);
-
+    
+    for(int i=0;i<N;i++)    printf("%d\n", ans[i]);
     return 0;
 }
